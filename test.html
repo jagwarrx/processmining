@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <form action="http://localhost:8080" method="POST" enctype="multipart/form-data" id="my_form">
+        <select name="select">
+            <option>Alphaminer</option>
+            <option>Two</option>
+        </select>
+        <input type="file" name="file"></input>
+        <input type="submit"></input>
+    </form>
+
+    <img src="" id="image">
+
+</body>
+<script type="text/javascript">
+$("#my_form").submit(function(event){
+	event.preventDefault(); //prevent default action
+	var post_url = $(this).attr("action"); //get form action url
+	var request_method = $(this).attr("method"); //get form GET/POST method
+	var form_data = new FormData(this); //Encode form elements for submission
+
+	$.ajax({
+		url : post_url,
+		type: request_method,
+		data : form_data,
+		contentType: false,
+		cache: false,
+		processData:false
+	}).done(function(response){ //
+		document.getElementById('image').src = response;
+	});
+});
+// document.getElementById('')
+// var xmlHttp = new XMLHttpRequest();
+// xmlHttp.open( "GET", "http://localhost:8080", false ); // false for synchronous request
+// xmlHttp.send();
+// var image =  xmlHttp.responseText;
+// console.log(image);
+// document.getElementById('image').src = image;
+</script>
+</html>
